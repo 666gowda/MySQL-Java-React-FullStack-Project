@@ -1,0 +1,85 @@
+.calender-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#event-disp-div:hover {
+  border: 1px solid #3b4bbc !important;
+}
+
+.calender:hover {
+  background: #eff3fc;
+}
+
+.calender-header1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.calender-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.day {
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.day:hover {
+  background: #9ca7f9;
+}
+
+#sideBar-menu {
+  color: #3b4bbc;
+  cursor: pointer;
+}
+
+#sideBar-menu:hover {
+  background-color: #3b4bbc !important;
+  color: whitesmoke !important;
+}
+
+#sideBar-menu:hover i {
+  color: white !important;
+}
+
+.ddbtnclass {
+  color: #3b4bbc;
+  /* color: #9CA7F9; */
+}
+
+.nav-link {
+  color: #3b4bbc !important;
+}
+
+.nav-link.active {
+  background-color: transparent !important;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1.5px solid #3b4bbc !important;
+  font-weight: bold;
+  color: #3b4bbc !important;
+}
+
+#card-carousel:hover {
+  border: 1px solid #3b4bbc !important;
+}
+
+#dropd-hov-evnt.active #card-carousel {
+  opacity: 0.2;
+}
+
+.tabbtn {
+  color: #047bd5;
+}
+
+#tabBtn:hover {
+  border: 1px solid #047bd5 !important;
+  cursor: pointer;
+}
