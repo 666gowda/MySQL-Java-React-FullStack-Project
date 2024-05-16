@@ -7,6 +7,7 @@ import "./ProductList.css";
 import Pagination from "react-bootstrap/Pagination";
 
 const EmployeeList = (props) => {
+  const [searchquery, setSearchQuery] = useState("");
   // pagination
   let active = 1;
   let items = [];
@@ -76,6 +77,24 @@ const EmployeeList = (props) => {
       });
   };
 
+  const renderStarRating = (rating) => {
+    const stars = [];
+    for (let i = 0; i < rating; i++) {
+      stars.push(
+        <span key={i} className="star">
+          &#9733;
+        </span>
+      );
+    }
+    return stars;
+  };
+
+  let filterProdcut = employees.filter((employee) => {
+    return employee.product_name
+      .toLowerCase()
+      .includes(searchquery.toLowerCase().trim());
+  });
+
   let design;
   if (!requestComplete) {
     design = (
@@ -119,7 +138,11 @@ const EmployeeList = (props) => {
           </div>
           <div className="col-6">
             <input
-              className="rounded shadow-sm border-1"
+              value={searchquery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+              }}
+              className="rounded shadow-sm border-1 ps-1"
               style={{ height: "24px", backgroundColor: "#EFF3FC" }}
               type="text"
               placeholder="Filter by..."
@@ -129,7 +152,7 @@ const EmployeeList = (props) => {
 
         <hr style={{ width: "95%" }} className="mx-auto" />
         <div className="row row-cols-1 ms-1 row-cols-md-4 g-4 font-monospace me-4">
-          {employees.map((e) => (
+          {filterProdcut.map((e) => (
             <div className="col" key={e.product_id}>
               <div
                 className="card h-100 w-100 rounded shadow mx-2"
@@ -144,7 +167,6 @@ const EmployeeList = (props) => {
                     <span style={{ fontSize: "1.1rem" }}>
                       <b>{e.product_name}</b>
                     </span>
-                    {/* <span style={{fontSize:'0.9rem'}}>({e.star_rating})</span> */}
                   </h5>
                   <Dropdown className="col-4 pt-1">
                     <Dropdown.Toggle
@@ -169,25 +191,32 @@ const EmployeeList = (props) => {
                     </Dropdown.Menu>
                   </Dropdown>
                 </div>
-                <div className="d-flex justify-content-center align-items-center">
+                <div className="d-flex justify-content-center align-items-around my-auto">
                   <img
                     src={e.image_url}
                     className="card-img-top"
                     alt={e.product_name}
                   />
                 </div>
+
                 <div
                   id="price-tab"
-                  className="card-body d-flex align-items-end justify-content-center"
+                  className="card-body row d-flex align-items-end justify-content-center"
                 >
+                  <span
+                    className="text-warning starrating font-monospace"
+                    style={{ fontSize: "1.2rem" }}
+                  >
+                    {renderStarRating(e.star_rating)}
+                  </span>
                   <p className="card-text border-top pt-2">
                     Price: {e.price} /RS &nbsp;
-                    <span
+                    {/* <span
                       className="text-success font-monospace"
                       style={{ fontSize: "0.9rem" }}
                     >
                       <u>({e.star_rating})</u>
-                    </span>
+                    </span> */}
                   </p>
                 </div>
               </div>
